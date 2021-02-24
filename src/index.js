@@ -7,10 +7,15 @@ const acceptedFormats = require('./serializer').acceptedFormats;
 const SerializerError = require('./serializer').SerializerError;
 
 const serverPort = config.get('api.port');
-const clientUrl = config.get('client.host') + config.get('client.port');
+const clientUrl = config.get('client.host') + config.get('client.port'); //url e porta de cliente da api
 
 app.use(bodyParser);
 
+/**
+ * Pega o formado requisitado na header accept e retorna os dados na resposta neste formato,
+ * se não tiver nada explícito retorna no padrão json,
+ * se o formato ainda não for suportado ou for inválido retorna erro
+ */
 app.use((req, res, next) => {
     
     let reqFormat = req.header('Accept');
@@ -27,11 +32,17 @@ app.use((req, res, next) => {
     next();
 });
 
+/**
+ * Configura o ip válido para o acesso da api
+ */
 app.use((req, res, next) => {
     res.set('Access-Control-Allow-Origin', clientUrl);
     next();
 });
 
+/**
+ * Configuração das mensagens de erro customizadas e seus respectivos status http
+ */
 app.use((error, req, res, next) => {
 
     let status = 500;
