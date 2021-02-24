@@ -1,0 +1,11 @@
+{
+    "mysql": {
+        "database": "personal_management",
+        "user": "root",
+        "password": "masterkey",
+        "host": "127.0.0.1"
+    },
+    "api": {
+        "port": 3000
+    }
+}
