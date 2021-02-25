@@ -3,11 +3,16 @@ const app = express();
 const bodyParser = require('body-parser');
 const config = require('config');
 
-const acceptedFormats = require('./serializer').acceptedFormats;
-const SerializerError = require('./serializer').SerializerError;
+const acceptedFormats = require('./Serializer').acceptedFormats;
+const SerializerError = require('./Serializer').SerializerError;
 
 const serverPort = config.get('api.port');
 const clientUrl = config.get('client.host') + config.get('client.port'); //url e porta de cliente da api
+
+const ValorNaoSuportado = require('./errors/ValorNaoSuportado');
+const NaoEncontrado = require('./errors/NaoEncontrado');
+const CampoInvalido = require('./errors/CampoInvalido');
+const DadosNaoFornecidos = require('./errors/DadosNaoFornecidos');
 
 app.use(bodyParser);
 
@@ -46,6 +51,16 @@ app.use((req, res, next) => {
 app.use((error, req, res, next) => {
 
     let status = 500;
+
+    if(error instanceof ValorNaoSuportado){
+        status = 406;
+    }
+    if(error instanceof NaoEncontrado){
+        status = 404;
+    }
+    if(error instanceof CampoInvalido || error instanceof DadosNaoFornecidos){
+        status = 400;
+    }
 
     const serializer = new SerializerError(res.getHeader('Content-Type'));
     res.status(status);
