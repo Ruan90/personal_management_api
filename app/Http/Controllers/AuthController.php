@@ -52,6 +52,14 @@ class AuthController extends Controller
             'token' => $token
         ];
 
-        return response($response, 201);
+        //return response($response, 201)->withHeaders(['X-Header-Token' => 'Header Value']);
+        return response($response)
+            ->withHeaders([
+                'Authorization' => 'Bearer ' . $token
+            ]);
+    }
+
+    public function verify(Request $request){
+      return $request->user();
     }
 }

@@ -23,6 +23,10 @@ Route::post('/login', [AuthController::class, 'login']);
 
 Route::group(['middleware' => ['auth:sanctum']], function(){
 
+    //////////// Confirmação de autenticação ////////////////////////
+    Route::get('/verify', [AuthController::class, 'verify']);
+    /////////////////////////////////////////////////////////////////
+
     //////////// AUTHOR ////////////////////////////////////////////
     Route::get('/author', [AuthorController::class, 'index']);
     Route::get('/author/{id}', [AuthorController::class, 'show']);

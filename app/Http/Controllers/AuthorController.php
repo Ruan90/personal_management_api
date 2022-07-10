@@ -12,7 +12,7 @@ class AuthorController extends Controller
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
-     * 
+     *
      * Paginação (/api/author?page=1)
      */
     public function index()
@@ -44,7 +44,7 @@ class AuthorController extends Controller
 
     /**
      * Display the specified resource by key word.
-     * 
+     *
      * @param  $keyWord
      * @return \Illuminate\Http\Response
      */
@@ -55,7 +55,7 @@ class AuthorController extends Controller
 
         //Retorno da busca pelo campo note da tabela
         $result2 = Author::where('note', 'LIKE', '%' . $keyWord . '%')->get();
-        
+
         //Junção do retorno dos dois resultados para apresentação como um único resultado
         return $result1->merge($result2);
     }
