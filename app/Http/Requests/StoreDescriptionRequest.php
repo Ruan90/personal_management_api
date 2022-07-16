@@ -26,6 +26,7 @@ class StoreDescriptionRequest extends FormRequest
     public function rules()
     {
         return [
+            'title' => 'required|min:3|max:80',
             'description' => 'required|min:3',
             'author_id' => ['required', 'integer', new ForeignKeyExist(Author::class)]
         ];
@@ -34,7 +35,8 @@ class StoreDescriptionRequest extends FormRequest
     public function messages()
     {
         return [
-            'description.min' => 'A Descrição deve ter mais de 3 caracteres!',
+            'min' => ':attribute deve ter mais de :min caracteres!',
+            'max' => ':attribute deve ter menos de :max caracteres!',
             'required' => 'O campo :attribute é obrigatório',
             'author_id.integer' => 'O campo author_id deve ser um inteiro válido!'
         ];

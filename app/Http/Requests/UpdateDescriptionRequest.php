@@ -26,10 +26,10 @@ class UpdateDescriptionRequest extends FormRequest
      */
     public function rules()
     {
-        return [
+        /*return [
             'description' => 'required|min:3',
             'author_id' => ['required', 'integer', new ForeignKeyExist(Author::class)]
-        ];
+        ];*/
     }
 
     public function messages()

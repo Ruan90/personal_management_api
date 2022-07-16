@@ -57,7 +57,7 @@ Route::group(['middleware' => ['auth:sanctum']], function(){
     Route::get('/description', [DescriptionController::class, 'index']);
     Route::get('/description/{id}', [DescriptionController::class, 'show']);
     Route::post('/description', [DescriptionController::class, 'store']);
-    Route::patch('/description', [DescriptionController::class, 'update']);
+    Route::patch('/description/{id}', [DescriptionController::class, 'update']);
     Route::delete('/description/{id}', [DescriptionController::class, 'destroy']);
 
     Route::post('/category/description', [DescriptionController::class, 'storeCategory']);

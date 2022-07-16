@@ -30,6 +30,7 @@ class DescriptionController extends Controller
     {
 
         $description = [
+            'title' => $request->title,
             'description' => $request->description,
             'note' => $request->note,
             'position' => $request->position,
@@ -68,9 +69,10 @@ class DescriptionController extends Controller
      * @param  \App\Models\Description  $description
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateDescriptionRequest $request)
+    public function update(UpdateDescriptionRequest $request, $id)
     {
-        $description = Description::find($request->id);
+        $description = Description::find($id);
+        $description->title = $request->title;
         $description->description = $request->description;
         $description->note = $request->note;
         $description->position = $request->position;

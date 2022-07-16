@@ -9,7 +9,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class Description extends Model
 {
     use HasFactory;
-    protected $fillable = ['description', 'reference_id', 'author_id'];
+    protected $fillable = ['title', 'description', 'reference_id', 'author_id'];
     use SoftDeletes;
 
     public function authors()

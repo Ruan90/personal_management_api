@@ -17,6 +17,7 @@ class CreateDescriptionsTable extends Migration
     {
         Schema::create('descriptions', function (Blueprint $table) {
             $table->bigIncrements("id");
+            $table->string('title')->nullable(false);
             $table->text("description")->nullable(false);
             $table->text("note")->nullable(true);
             $table->integer("position")->nullable(true)->unique();
